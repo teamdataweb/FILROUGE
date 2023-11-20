@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: mariadb
-        image: mariadb:latest
+        image: mariadb:11.1
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
