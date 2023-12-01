@@ -7,6 +7,6 @@ spec:
    apiVersion: apps/v1
    kind: Deployment
    name: wordpress
- minReplicas: 2
- maxReplicas: 10
- targetCPUUtilizationPercentage: 50
+ minReplicas: {{.Values.wordpress.hpa.min}}
+ maxReplicas: {{.Values.wordpress.hpa.max}}
+ targetCPUUtilizationPercentage: {{.Values.wordpress.hpa.cpu}}

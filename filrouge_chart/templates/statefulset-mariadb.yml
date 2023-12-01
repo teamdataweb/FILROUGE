@@ -14,16 +14,16 @@ spec:
     spec:
       containers:
       - name: mariadb
-        image: mariadb:11.1
+        image: {{.Values.mariadb.image.repository}}:{{.Values.mariadb.image.tag}}
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: root
+          value: {{.Values.mariadb.mysql_root_password}}
         - name: MYSQL_DATABASE
-          value: wordpress
+          value: {{.Values.mariadb.mysql_database}}
         - name: MYSQL_USER
-          value: wordpress
+          value: {{.Values.mariadb.mysql_user}}
         - name: MYSQL_PASSWORD
-          value: wordpress
+          value: {{.Values.mariadb.mysql_password}}
         ports:
         - containerPort: 3306
         volumeMounts:

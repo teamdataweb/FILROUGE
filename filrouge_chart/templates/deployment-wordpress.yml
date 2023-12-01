@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: wordpress
-  replicas: 2
+  replicas: {{.Values.wordpress.replicas}}
   strategy:
     type: RollingUpdate
   template:
@@ -18,22 +18,22 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: wordpress:6.4.1
+        image: {{.Values.wordpress.image.repository}}:{{.Values.wordpress.image.tag}}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         env:
           - name: WORDPRESS_DB_HOST
-            value: mariadb-service
+            value: {{.Values.wordpress.wp_db_host}}
           - name: WORDPRESS_DB_NAME
-            value: wordpress
+            value: {{.Values.mariadb.mysql_database}}
           - name: WORDPRESS_DB_USER
-            value: wordpress
+            value: {{.Values.mariadb.mysql_user}}
           - name: WORDPRESS_DB_PASSWORD
-            value: wordpress
+            value: {{.Values.mariadb.mysql_password}}
         volumeMounts:
           - name: wordpress-html
-            mountPath: /var/www/html
+            mountPath: /var/www/html/wp-content/uploads
       volumes:
         - name: wordpress-html
           persistentVolumeClaim:
