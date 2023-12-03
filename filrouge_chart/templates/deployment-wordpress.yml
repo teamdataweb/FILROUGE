@@ -31,6 +31,8 @@ spec:
             value: {{.Values.mariadb.mysql_user}}
           - name: WORDPRESS_DB_PASSWORD
             value: {{.Values.mariadb.mysql_password}}
+          - name : WORDPRESS_CONFIG_EXTRA
+            value : define('WP_HOME','{{.Values.wordpress.host}}');define('WP_SITEURL','{{.Values.wordpress.host}}');
         volumeMounts:
           - name: wordpress-html
             mountPath: /var/www/html/wp-content/uploads
