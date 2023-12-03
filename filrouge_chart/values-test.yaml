@@ -1,6 +1,5 @@
 wordpress:
-  ingress:
-    host: filrouge-test.barnz.cloudns.ph
+  host: filrouge-test.barnz.cloudns.ph
   replicas: 1
   image:
     repository: barnz/wordpress-filrouge
