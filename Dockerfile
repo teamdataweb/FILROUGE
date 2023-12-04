@@ -1,3 +1,3 @@
-FROM wordpress:6.4-apache
+FROM wordpress:latest
 
 COPY ./wordpress-html/ /var/www/html/
