@@ -19,18 +19,27 @@ spec:
       containers:
       - name: wordpress
         image: {{.Values.wordpress.image.repository}}:{{.Values.wordpress.image.tag}}
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: {{.Values.wordpress.imagePullPolicy}}
         ports:
         - containerPort: 80
         env:
           - name: WORDPRESS_DB_HOST
             value: {{.Values.wordpress.wp_db_host}}
           - name: WORDPRESS_DB_NAME
-            value: {{.Values.mariadb.mysql_database}}
+            valueFrom:
+              secretKeyRef:
+                name: secrets-mysql
+                key : mysql_database
           - name: WORDPRESS_DB_USER
-            value: {{.Values.mariadb.mysql_user}}
+            valueFrom:
+              secretKeyRef:
+                name: secrets-mysql
+                key : mysql_user
           - name: WORDPRESS_DB_PASSWORD
-            value: {{.Values.mariadb.mysql_password}}
+            valueFrom:
+              secretKeyRef:
+                name: secrets-mysql
+                key : mysql_password
           - name : WORDPRESS_CONFIG_EXTRA
             value : define('WP_HOME','{{.Values.wordpress.host}}');define('WP_SITEURL','{{.Values.wordpress.host}}');
         volumeMounts:

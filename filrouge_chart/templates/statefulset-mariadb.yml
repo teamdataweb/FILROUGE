@@ -15,15 +15,28 @@ spec:
       containers:
       - name: mariadb
         image: {{.Values.mariadb.image.repository}}:{{.Values.mariadb.image.tag}}
+        imagePullPolicy: {{.Values.mariadb.imagePullPolicy}}
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: {{.Values.mariadb.mysql_root_password}}
+          valueFrom:
+              secretKeyRef:
+                name: secrets-mysql
+                key : mysql_root_password
         - name: MYSQL_DATABASE
-          value: {{.Values.mariadb.mysql_database}}
+          valueFrom:
+              secretKeyRef:
+                name: secrets-mysql
+                key : mysql_database
         - name: MYSQL_USER
-          value: {{.Values.mariadb.mysql_user}}
+          valueFrom:
+              secretKeyRef:
+                name: secrets-mysql
+                key : mysql_user
         - name: MYSQL_PASSWORD
-          value: {{.Values.mariadb.mysql_password}}
+          valueFrom:
+              secretKeyRef:
+                name: secrets-mysql
+                key : mysql_password
         ports:
         - containerPort: 3306
         volumeMounts:

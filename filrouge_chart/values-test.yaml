@@ -3,7 +3,8 @@ wordpress:
   replicas: 1
   image:
     repository: barnz/wordpress-filrouge
-    tag: latest
+    tag: 1.2
+  imagePullPolicy: Always
   wp_db_host: mariadb-service
   hpa:
     min: 1
@@ -14,6 +15,7 @@ mariadb:
   image:
     repository: mariadb
     tag: 11.1
+  imagePullPolicy: IfNotPresent
   mysql_root_password: root
   mysql_database: wordpress
   mysql_user: wordpress
