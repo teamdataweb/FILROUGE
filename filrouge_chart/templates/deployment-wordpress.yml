@@ -41,7 +41,9 @@ spec:
                 name: secrets-mysql
                 key : mysql_password
           - name : WORDPRESS_CONFIG_EXTRA
-            value : define('WP_HOME','{{.Values.wordpress.host}}');define('WP_SITEURL','{{.Values.wordpress.host}}');
+            value : 
+              define('WP_HOME','http://{{.Values.wordpress.host}}');
+              define('WP_SITEURL','http://{{.Values.wordpress.host}}');
         volumeMounts:
           - name: wordpress-html
             mountPath: /var/www/html/wp-content/uploads
