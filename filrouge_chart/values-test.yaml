@@ -3,7 +3,7 @@ wordpress:
   replicas: 1
   image:
     repository: barnz/wordpress-filrouge
-    tag: 1.2
+    tag: latest
   wp_db_host: mariadb-service
   hpa:
     min: 1
