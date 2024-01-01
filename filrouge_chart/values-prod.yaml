@@ -6,6 +6,7 @@ wordpress:
     tag: 1.3
   imagePullPolicy: Always
   wp_db_host: mariadb-service
+  volume_efs_id: fs-04658065d9adb6475
   hpa:
     min: 2
     max: 5
@@ -20,4 +21,4 @@ mariadb:
   mysql_database: wordpress
   mysql_user: wordpress
   mysql_password: wordpress
-  
+  volume_efs_id: fs-04cb666198976bf84

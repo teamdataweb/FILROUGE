@@ -33,7 +33,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mariadb-pvc
+  name: {{.Release.Namespace}}-mariadb-pvc
 spec:
   volumeName: {{.Release.Namespace}}-db-pv
   storageClassName: local-path
@@ -47,7 +47,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wordpress-pvc
+  name: {{.Release.Namespace}}-wordpress-pvc
 spec:
   volumeName: {{.Release.Namespace}}-wp-pv
   storageClassName: local-path
