@@ -40,7 +40,7 @@ spec:
               secretKeyRef:
                 name: secrets-mysql
                 key : mysql_password
-          - name : WORDPRESS_CONFIG_EXTRA
+          - name : OLD_WORDPRESS_CONFIG_EXTRA
             value : 
               define('WP_HOME','http://{{.Values.wordpress.host}}');
               define('WP_SITEURL','http://{{.Values.wordpress.host}}');

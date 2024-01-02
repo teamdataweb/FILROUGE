@@ -21,4 +21,4 @@ mariadb:
   mysql_database: wordpress
   mysql_user: wordpress
   mysql_password: wordpress
-  volume_efs_id: fs-04cb666198976bf84
+  volume_efs_id: fs-094d72ee1ee57ef06
