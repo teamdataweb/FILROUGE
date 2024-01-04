@@ -2,7 +2,7 @@ wordpress:
   host: filrouge-prod.barnz.cloudns.ph
   replicas: 3
   image:
-    repository: barnz/wordpress-filrouge
+    repository: jaysse/wordpress-filrouge
     tag: latest
   imagePullPolicy: Always
   wp_db_host: mariadb-service
