@@ -10,7 +10,7 @@ spec:
       app: wordpress
   replicas: {{.Values.wordpress.replicas}}
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:
@@ -28,19 +28,19 @@ spec:
           - name: WORDPRESS_DB_NAME
             valueFrom:
               secretKeyRef:
-                name: secrets-mysql
-                key : mysql_database
+                name: secrets-db-wordpress
+                key: mysql_database
           - name: WORDPRESS_DB_USER
             valueFrom:
               secretKeyRef:
-                name: secrets-mysql
-                key : mysql_user
+                name: secrets-db-wordpress
+                key: mysql_user
           - name: WORDPRESS_DB_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: secrets-mysql
-                key : mysql_password
-          - name : OLD_WORDPRESS_CONFIG_EXTRA
+                name: secrets-db-wordpress
+                key: mysql_password
+          - name : WORDPRESS_CONFIG_EXTRA
             value : 
               define('WP_HOME','http://{{.Values.wordpress.host}}');
               define('WP_SITEURL','http://{{.Values.wordpress.host}}');

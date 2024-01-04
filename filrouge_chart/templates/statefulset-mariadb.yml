@@ -12,37 +12,53 @@ spec:
       labels:
         app: mariadb
     spec:
+      initContainers:
+      - name: mariadb-create-directory-structure
+        image: busybox
+        command:
+          [
+            "sh",
+            "-c",
+            "/bin/mkdir -p /bitnami/mariadb/data && /bin/chmod -R 777 /bitnami/mariadb",
+          ]
+        volumeMounts:
+        - name: mariadb-data
+          mountPath: /bitnami/mariadb/data
       containers:
       - name: mariadb
         image: {{.Values.mariadb.image.repository}}:{{.Values.mariadb.image.tag}}
         imagePullPolicy: {{.Values.mariadb.imagePullPolicy}}
         env:
-        - name: MYSQL_ROOT_PASSWORD
+        - name: MARIADB_ROOT_PASSWORD
           valueFrom:
-              secretKeyRef:
-                name: secrets-mysql
-                key : mysql_root_password
-        - name: MYSQL_DATABASE
+            secretKeyRef:
+              name: secrets-db-wordpress
+              key: mysql_root_password
+        - name: MARIADB_DATABASE
           valueFrom:
-              secretKeyRef:
-                name: secrets-mysql
-                key : mysql_database
-        - name: MYSQL_USER
+            secretKeyRef:
+              name: secrets-db-wordpress
+              key: mysql_database
+        - name: MARIADB_USER
           valueFrom:
-              secretKeyRef:
-                name: secrets-mysql
-                key : mysql_user
-        - name: MYSQL_PASSWORD
+            secretKeyRef:
+              name: secrets-db-wordpress
+              key: mysql_user
+        - name: MARIADB_PASSWORD
           valueFrom:
-              secretKeyRef:
-                name: secrets-mysql
-                key : mysql_password
+            secretKeyRef:
+              name: secrets-db-wordpress
+              key: mysql_password
+        - name: MARIADB_SKIP_TEST_DB
+          value: 'yes'
+        - name: MARIADB_INIT_SLEEP_TIME
+          value: '120'
         ports:
         - containerPort: 3306
         volumeMounts:
-        - name: mariadb-mysql
-          mountPath: /var/lib/mysql
+        - name: mariadb-data
+          mountPath: /bitnami/mariadb/data
       volumes:
-      - name: mariadb-mysql
+      - name: mariadb-data
         persistentVolumeClaim:
           claimName: {{.Release.Namespace}}-efs-db-claim
