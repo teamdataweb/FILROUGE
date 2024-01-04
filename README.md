@@ -3,16 +3,17 @@
 ***
 Image Docker - Front end
 Repo dockerhub de l'image wordpress avec intégration des sources personnalisées : barnz/wordpress-filrouge
+
 * docker build -t barnz/wordpress-filrouge:[tag] .
 * docker push barnz/wordpress-filrouge:[tag]
 
 ***
 Déploiement HELM
-*
+
 Modifier la valeur de wordpress:host: dans values-[xxx].yaml en fonction de l'environnement :
 - test : http://filrouge-test.barnz.cloudns.ph
 - prod : http://filrouge-prod.barnz.cloudns.ph
-*
+
 
 * le chart utilise les secrets déjà installés pour chaque namespace (secrets-db-wordpress)
 
